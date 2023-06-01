@@ -1,0 +1,37 @@
+Uživatelská dokumentace
+--------------------------------------------
+Vítejte v uživatelské dokumentaci k programu piškvorky s implementovaným botem pomocí algoritmu minimaxu s alfa-beta prořezáváním v jazyce Java. Tento program vám umožní hrát piškvorky proti počítači, včetně měnění některých parametrů hry.
+
+ Piškvorky
+ ----------------------------------------------
+Piškvorky jsou desková hra pro dva hráče, kteří se střídají v umísťování kamenů na hrací desku. Cílem hry je umístit pět svých kamenů v řadě (horizontálně, vertikálně nebo diagonálně) a zároveň zabránit soupeři v tom samém.
+ 
+ 
+ Ovládání programu
+ ------------------------------------------
+ - Po spuštění programu uvidíte vytisknutou hrací desku s výzvou, abyste zadali svůj první tah. V tomto momentu bot (Hráč 2) čeká na váš (Hráč 1) tah, aby mohl odpovědět.
+ - Tahy se zadávají ve formátu <PÍSMENO_OZNAČUJÍCÍ_SLOUPEC><číslo_řádku>, jakmile potvrdíte, provede se vámi zadaný tah (např D7).
+ - Jakmile odehrajete, po chvíli odehraje i soupeř. Jeho tah můžete vidět buď v textové reprezentaci, nebo ve vytisknuté hrací desce pod ním.
+ - Zadávejte své tahy tak dlouho, dokud hra neskončí.
+ - Hra skončí, jakmile jeden z hráčů vyhraje nebo jakmile dojde k zaplnění hrací desky.
+ - Jakmile hra skončí, zobrazí se dotaz, zda si přejete pokračovat. Pokud si přejete pokračovat, zadejte znak y, jinak znak n pro ukončení programu.
+ - Program také nabízí několik příkazů pro konfiguraci programu, které lze zadat při výzvě k zadání dalšího tahu. Každý příkaz začíná znakem "/".
+ - Příkazy:
+ 	- /depth - vypíše, kolik tahů vidí protihráč dopředu (hloubka prohledávání stavového prostoru botem)
+ 	- /depth n - změní počet tahů, kolik uvidí protihráč dopředu, resp. zvýší/sníží obtížnost (kde n je přirozené číslo v rozsahu 1-5 včetně).
+ 	- /size - vypíše velikost hrací desky
+ 	- /size n - změní velikost hrací desky (kde n je přirozené číslo v rozsahu 6-19 včetně).
+ 	- /restart - restartuje aktuální hru (vymaže všechny kameny, aktualizuje aktuální velikost a změní velikost desky).
+ 	- /print - vytiskne aktuální stav hry.
+ 
+ 
+ Poznámky
+ ---------------------------------------------
+ - Bot funguje na základě minimaxu s alfa-beta prořezáváním. Délka čekání na jeho tah je tedy ovlivněna několika faktory:
+ 	- velikost desky: čím více volných políček je na desce, tím je vyšší šance, že počítači bude déle trvat provedení kroku,
+ 	- hloubka vyhledávání: složitost algoritmu je v nejhorším případě exponenciální vzhledem k volnému počtu políček, tedy změna hloubky výrazně ovlivňuje jak dobu čekání, tak i kvalitu tahů,
+ 	- algoritmus má paměť na 5 posledních tahů a od nich se odvíjí efektivita alfa-beta prořezávání, je tedy možné, že při výraznější změně lokace tahu bude získávání tahu trvat o něco déle.
+- Z důvodů uvedených výše není příliš praktické kombinovat veliké rozměry desky (více než např 12) a velkou hloubku prohledávání (více než 3).
+- Jako řešení je vhodnější kompromis, tedy najít mezi těmito hodnotami balanc (v případě, že nemáte tolik času :-)).
+- minimax obecně stojí na ohodnocovací funkci. Protože nejsem expert na hru sudoku a cílem této práce bylo spíše využítí jazyka, dovolil jsem si půjčit ohodnocovací funkci z webu [1] a tu si následně poupravit podle vlastních potřeb. 
+[1] https://blog.theofekfoundation.org/artificial-intelligence/2015/12/11/minimax-for-gomoku-connect-five/
